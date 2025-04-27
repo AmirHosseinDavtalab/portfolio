@@ -1,0 +1,13 @@
+@font-face {
+    font-family: iransans;
+    src: url(./fonts/IRANSansX-Medium.woff) format("woff"),
+      url(./fonts/IRANSansX-Medium.woff2) format("woff2");
+  }
+  * {
+    font-family: iransans;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
