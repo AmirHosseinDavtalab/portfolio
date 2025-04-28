@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>ورود به حساب کاربری</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html" class="home-link">صفحه اصلی</a>
+                <a href="login.html" class="btn login-btn">ورود</a>
+                <a href="register.html" class="btn register-btn">ثبت نام</a>
+                <a href="#" class="about-link">درباره ما</a>
+            </div>
+            <div class="header-right">
+                <div class="logo">
+                    <img src="logo.png" alt="لوگو سایت">
+                </div>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <nav>
+                <ul>
+                    <li><a href="index.html">صفحه اصلی</a></li>
+                    <li><a href="#">درباره ما</a></li>
+                    <li><a href="#">تماس با ما</a></li>
+                    <li><a href="login.html" class="btn mobile-login-btn">ورود</a></li>
+                    <li><a href="register.html" class="btn mobile-register-btn">ثبت نام</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <button class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <main class="login-container">
+        <div class="login-box">
+            <h1>ورود به حساب کاربری</h1>
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">ایمیل</label>
+                    <input type="email" id="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">رمز عبور</label>
+                    <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        مرا به خاطر بسپار
+                    </label>
+                    <a href="#" class="forgot-password">رمز عبور را فراموش کرده‌اید؟</a>
+                </div>
+                <button type="submit" class="btn submit-btn">ورود</button>
+                <div class="register-link">
+                    حساب کاربری ندارید؟ <a href="register.html">ثبت نام کنید</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>دسترسی سریع</h3>
+                    <ul>
+                        <li><a href="index.html">صفحه اصلی</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>ارتباط با ما</h3>
+                    <ul>
+                        <li>ایمیل: info@example.com</li>
+                        <li>تلفن: 09155897156 - 09038551795</li>
+                        <li>آدرس: مشهد</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>شبکه‌های اجتماعی</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">اینستاگرام</a>
+                        <a href="#" class="social-link">تلگرام</a>
+                        <a href="#" class="social-link">لینکدین</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>تمامی حقوق این وبسایت محفوظ است © ۱۴۰۳</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const icon = darkModeToggle.querySelector('i');
+        
+        function checkTimeAndSetDarkMode() {
+            const hour = new Date().getHours();
+            const isNightTime = hour >= 17 || hour < 6; // از ساعت 5 بعد از ظهر تا 6 صبح حالت شب فعال میشه
+            
+            if (isNightTime) {
+                document.body.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-mode');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Check for saved dark mode preference or time-based setting
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        } else if (localStorage.getItem('darkMode') === 'disabled') {
+            document.body.classList.remove('dark-mode');
+            icon.classList.replace('fa-sun', 'fa-moon');
+        } else {
+            checkTimeAndSetDarkMode();
+        }
+
+        // Check time every minute
+        setInterval(checkTimeAndSetDarkMode, 60000);
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+    </script>
+</body>
+</html> 
